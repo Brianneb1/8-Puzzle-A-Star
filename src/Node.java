@@ -73,23 +73,41 @@ public class Node {
     }
 
     //calculate heuristic function
-    public int fValue(int[][] goal, int gValue) //gValue = level of child (how many moves made to get here)
+    public int fValue(int[][] goal, int gValue)
+    //gValue = level of child (how many moves made to get here)
     {
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                //count number of misplaced tiles
+                //count number of misplaced tiles (heuristic)
                 if (this.grid[i][j] != goal[i][j])
                 {
-                    hValue++;
+                    this.hValue++;
                 }
             }
         }
 
         //return heuristic function value
-        fValue = gValue + hValue;
-        return fValue;
+        this.fValue = this.gValue + this.hValue;
+        return this.fValue;
+    }
+
+    public int hValue(int[][] goal)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                //count number of misplaced tiles (heuristic)
+                if (this.grid[i][j] != goal[i][j])
+                {
+                    this.hValue++;
+                }
+            }
+        }
+        //return heuristic function value (how many misplaced tiles)
+        return this.hValue;
     }
 
     public void printGrid()
