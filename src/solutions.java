@@ -48,5 +48,43 @@ public class solutions {
     }
 
 
+    public static ArrayList<Node> greedyBestFirst(Node start, Node goal){
+        minHeapBFS heap = new minHeapBFS();
+        heap.add(start);
+        ArrayList<Node> visited = new ArrayList<Node>();
+        ArrayList<Node> path = new ArrayList<Node>();
+
+
+        while (heap.size() != 0)
+        {
+            Node n = heap.remove();
+            if (n.grid.equals(goal.grid))
+            {
+                while (n != null) //until reach end of chain
+                {
+                    path.add(n); //add n
+                    n = n.getParent(); //get n's parent
+                }
+                return path;
+            }
+            else
+            {
+                ArrayList<Node> children = n.createChildren();
+                for (Node child: children)
+                {
+                    if (!visited.contains(child))
+                    {
+                        visited.add(child);
+                        heap.add(child);
+                        child.setParent(n);
+                    }
+                }
+
+            }
+        }
+
+        return null;
+
+    }
 
 }
