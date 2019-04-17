@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class solutions {
 
@@ -17,7 +18,11 @@ public class solutions {
             level++;
             Node n = open.remove(level); //get current node
 
-            if (n.grid.equals(goal.grid)) //if found goal state, recreate path
+            //for debugging purposes, print list of nodes in open list (heap)
+            open.printList();
+
+            //if (n.grid.equals(goal.grid)) //if found goal state, recreate path
+            if(Arrays.deepEquals(n.grid, goal.grid))
             {
                 while (n != null) //until reach end of chain
                 {
@@ -58,7 +63,8 @@ public class solutions {
         while (heap.size() != 0)
         {
             Node n = heap.remove();
-            if (n.grid.equals(goal.grid))
+            //if (n.grid.equals(goal.grid))
+            if(Arrays.deepEquals(n.grid, goal.grid))
             {
                 while (n != null) //until reach end of chain
                 {
