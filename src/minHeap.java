@@ -30,6 +30,7 @@ public class minHeap
 
     public void printList()
     {
+        System.out.print("Open list: ");
         for (Node val: ctree)
         {
             System.out.print(val.hValue);
