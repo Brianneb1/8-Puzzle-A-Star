@@ -19,11 +19,12 @@ public class solutions {
 
             if (n.grid.equals(goal)) //if found goal state, recreate path
             {
-//                while ( )
-//                {
-//                    path.add()
-//                }
-                //return path
+                while (n != null) //until reach end of chain
+                {
+                    path.add(n); //add n
+                    n = n.getParent(); //get n's parent
+                }
+                return path;
             }
 
             closed.add(n);
@@ -40,6 +41,7 @@ public class solutions {
                         continue;
                 }
                 open.add(child, level); //add child to open list
+                child.setParent(n);
             }
         }
         return path;
