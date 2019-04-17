@@ -23,38 +23,30 @@ public class main {
         int[][] empty = {{0,0,0},{0,0,0},{0,0,0}};
         Node emptyNode = new Node(empty);
 
-        //call astar function on already complete puzzle, store completed path
-        ArrayList<Node> tester = new solutions().astar(goal, goal);
-        for (int i = 0; i < tester.size(); i++)
-        {
-            System.out.println("Node "+i+":");
-            tester.get(i).printGrid();
-        }
+        //call astar function on already complete puzzle, print completed path
+        tester.astarTest(goal,goal);
 
         //tester grid that's 2 numbers off
         int[][] almostThere = {{2,1,3},{4,5,6},{7,8,0}};
         Node almost = new Node(almostThere);
+
         //call astar function on almost complete puzzle, store completed path
-        ArrayList<Node> tester1 = new solutions().astar(almost, goal);
-        for (int i = 0; i < tester1.size(); i++)
-        {
-            System.out.println("Node "+i+":");
-            tester1.get(i).printGrid();
-        }
+        tester.astarTest(almost,goal);
+
 
         //fill matrix randomly (for testing)
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                int randIndex = rand.nextInt(values.size());
-                int value = values.get(randIndex);
-                puzzle[i][j] = value;
-                values.remove(randIndex);
-                System.out.print(value + " ");
-            }
-            System.out.println();
-        }
+//        for (int i = 0; i < 3; i++)
+//        {
+//            for (int j = 0; j < 3; j++)
+//            {
+//                int randIndex = rand.nextInt(values.size());
+//                int value = values.get(randIndex);
+//                puzzle[i][j] = value;
+//                values.remove(randIndex);
+//                System.out.print(value + " ");
+//            }
+//            System.out.println();
+//        }
 
         //create node of current state, first level of children, and heap fvalues based on heuristic
 //        Node start = new Node(puzzle);
