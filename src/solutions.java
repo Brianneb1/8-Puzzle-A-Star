@@ -17,7 +17,7 @@ public class solutions {
             level++;
             Node n = open.remove(level); //get current node
 
-            if (n.grid.equals(goal)) //if found goal state, recreate path
+            if (n.grid.equals(goal.grid)) //if found goal state, recreate path
             {
                 while (n != null) //until reach end of chain
                 {
