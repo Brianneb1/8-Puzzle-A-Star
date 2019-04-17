@@ -28,6 +28,15 @@ public class minHeap
         return val;
     }
 
+    public void printList()
+    {
+        for (Node val: ctree)
+        {
+            System.out.print(val.hValue);
+        }
+        System.out.println();
+    }
+
     public Node top()
     {
         return ctree.get(0);
