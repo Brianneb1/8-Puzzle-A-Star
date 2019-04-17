@@ -6,9 +6,11 @@ public class Node {
     private int fValue;
     public int hValue;
     public int gValue;
+    public Node parent;
 
     public Node(int[][] puzzle)
     {
+        this.parent = null;
         this.grid = puzzle;
     }
 
@@ -105,6 +107,15 @@ public class Node {
         System.out.println();
     }
 
+    public void setParent(Node n)
+    {
+        this.parent = n;
+    }
+
+    public Node getParent()
+    {
+        return this.parent;
+    }
 }
 
 
