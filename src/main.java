@@ -14,7 +14,35 @@ public class main {
             values.add(i);
         }
 
-        //fill matrix randomly
+        System.out.println();
+
+        //create goal matrix and corresponding node
+        int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
+        Node goal = new Node(goalState);
+
+        int[][] empty = {{0,0,0},{0,0,0},{0,0,0}};
+        Node emptyNode = new Node(empty);
+
+        //call astar function on already complete puzzle, store completed path
+        ArrayList<Node> tester = new solutions().astar(goal, goal);
+        for (int i = 0; i < tester.size(); i++)
+        {
+            System.out.println("Node "+i+":");
+            tester.get(i).printGrid();
+        }
+
+        //tester grid that's 2 numbers off
+        int[][] almostThere = {{2,1,3},{4,5,6},{7,8,0}};
+        Node almost = new Node(almostThere);
+        //call astar function on almost complete puzzle, store completed path
+        ArrayList<Node> tester1 = new solutions().astar(almost, goal);
+        for (int i = 0; i < tester1.size(); i++)
+        {
+            System.out.println("Node "+i+":");
+            tester1.get(i).printGrid();
+        }
+
+        //fill matrix randomly (for testing)
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -28,26 +56,16 @@ public class main {
             System.out.println();
         }
 
-        System.out.println();
-
-        //create goal matrix and corresponding node
-        int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
-        Node goal = new Node(goalState);
-
-        int[][] empty = {{0,0,0},{0,0,0},{0,0,0}};
-        Node noSolution = new Node(empty);
-
-        //create node of current state, first level of children, and heap
-        //fvalues based on heuristic
-        Node start = new Node(puzzle);
-
-        //call astar function, store completed path
-        ArrayList<Node> complete = new solutions().astar(start, goal);
-        for (int i = 0; i < complete.size(); i++)
-        {
-            System.out.println("Node "+i+":");
-            complete.get(i).printGrid();
-        }
+        //create node of current state, first level of children, and heap fvalues based on heuristic
+//        Node start = new Node(puzzle);
+//
+//        //call astar function on random puzzle, store completed path
+//        ArrayList<Node> complete = new solutions().astar(start, goal);
+//        for (int i = 0; i < complete.size(); i++)
+//        {
+//            System.out.println("Node "+i+":");
+//            complete.get(i).printGrid();
+//        }
 
 
 
