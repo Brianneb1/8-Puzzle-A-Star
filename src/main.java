@@ -43,10 +43,13 @@ public class main {
 
         //call astar function, store completed path
         ArrayList<Node> complete = new solutions().astar(start, goal);
-        for (Node n: complete)
+        for (int i = 0; i < complete.size(); i++)
         {
-            n.printGrid();
+            System.out.println("Node "+i+":");
+            complete.get(i).printGrid();
         }
+
+
 
 
 
