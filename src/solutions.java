@@ -22,7 +22,7 @@ public class solutions {
             open.printList();
 
             //if (n.grid.equals(goal.grid)) //if found goal state, recreate path
-            if(Arrays.deepEquals(n.grid, goal.grid))
+            if(Arrays.deepEquals(n.grid, goal.grid)) //gets to a certain point that n never changes
             {
                 while (n != null) //until reach end of chain
                 {
@@ -35,14 +35,14 @@ public class solutions {
             closed.add(n);
             ArrayList<Node> children = n.createChildren(goal, level);
 
-            for (int i = 0; i < children.size(); i++) //for each child of n
+            for (int i = 0; i < children.size(); i++) //for each child of n (gets same child every time?)
             {
                 Node child = children.get(i); //get child
                 if (closed.contains(child)) //if child in closed, skip
                     continue;
                 if(open.contains(child)) //if child in open
                 {
-                    if (child.gValue > n.gValue) //if child gVal > parent, skip
+                    if (child.gValue <= n.gValue) //if child gVal < parent, skip
                         continue;
                 }
                 open.add(child, level); //add child to open list
