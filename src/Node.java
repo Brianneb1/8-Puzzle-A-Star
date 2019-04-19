@@ -22,6 +22,15 @@ public class Node {
     {
         //arraylist to add child nodes to
         ArrayList<Node> children = new ArrayList<Node>();
+        int[][] grid = new int[3][3]; //clone this.grid so it doesn't get altered after each node is created
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                grid[i][j] = this.grid[i][j];
+            }
+        }
+
         int x, y;
         x = 0;
         y = 0;
@@ -31,43 +40,71 @@ public class Node {
         {
             for (int j = 0; j < 3; j++)
             {
-                if (this.grid[i][j] == 0)
+                if (grid[i][j] == 0)
+                {
                     x = i;
                     y = j;
+                }
             }
         }
         //create first child node, swap the space with number below
-        Node n1 = new Node(this.grid, goal.grid, level);
+        Node n1 = new Node(grid, goal.grid, level);
         if (y > 0) //make sure it doesn't go out of bounds
         {
-            n1.grid[x][y] = this.grid[x][y - 1];
+            int temp = n1.grid[x][y-1];
             n1.grid[x][y - 1] = 0;
+            n1.grid[x][y] = temp;
             children.add(n1);
         }
 
+        for (int i = 0; i < 3; i++) //reclone this.grid
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                grid[i][j] = this.grid[i][j];
+            }
+        }
+
         //create second child node, swap the space with number above
-        Node n2 = new Node(this.grid, goal.grid, level);
+        Node n2 = new Node(grid, goal.grid, level);
         if (y < 2)
         {
-            n2.grid[x][y] = this.grid[x][y + 1];
+            n2.grid[x][y] = grid[x][y + 1];
             n2.grid[x][y + 1] = 0;
-            children.add(n2);
+            children.add(n2);                   
+
+        }
+
+        for (int i = 0; i < 3; i++) //reclone this.grid
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                grid[i][j] = this.grid[i][j];
+            }
         }
 
         //create third child node, swap the space with number to right
-        Node n3 = new Node(this.grid, goal.grid, level);
+        Node n3 = new Node(grid, goal.grid, level);
         if (x < 2)
         {
-            n3.grid[x][y] = this.grid[x + 1][y];
+            n3.grid[x][y] = grid[x + 1][y];
             n3.grid[x + 1][y] = 0;
             children.add(n3);
         }
 
+        for (int i = 0; i < 3; i++) //reclone this.grid
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                grid[i][j] = this.grid[i][j];
+            }
+        }
+
         //create fourth child node, swap the space with number to left
-        Node n4 = new Node(this.grid, goal.grid, level);
+        Node n4 = new Node(grid, goal.grid, level);
         if (x > 0)
         {
-            n4.grid[x][y] = this.grid[x-1][y];
+            n4.grid[x][y] = grid[x-1][y];
             n4.grid[x-1][y] = 0;
             children.add(n4);
         }
