@@ -8,14 +8,17 @@ public class Node {
     public int gValue;
     public Node parent;
 
-    public Node(int[][] puzzle)
+    public Node(int[][] puzzle, int[][] goal, int level)
     {
         this.parent = null;
         this.grid = puzzle;
+        this.fValue = fValue(goal, level);
+        this.hValue = hValue(goal);
     }
 
-    //create child nodes, return as an arraylist
-    public ArrayList<Node> createChildren()
+
+    //create child nodes, return as an arraylist used for astar
+    public ArrayList<Node> createChildren(Node goal, int level)
     {
         //arraylist to add child nodes to
         ArrayList<Node> children = new ArrayList<Node>();
@@ -34,7 +37,7 @@ public class Node {
             }
         }
         //create first child node, swap the space with number below
-        Node n1 = new Node(this.grid);
+        Node n1 = new Node(this.grid, goal.grid, level);
         if (y > 0) //make sure it doesn't go out of bounds
         {
             n1.grid[x][y] = this.grid[x][y - 1];
@@ -43,7 +46,7 @@ public class Node {
         }
 
         //create second child node, swap the space with number above
-        Node n2 = new Node(this.grid);
+        Node n2 = new Node(this.grid, goal.grid, level);
         if (y < 2)
         {
             n2.grid[x][y] = this.grid[x][y + 1];
@@ -52,7 +55,7 @@ public class Node {
         }
 
         //create third child node, swap the space with number to right
-        Node n3 = new Node(this.grid);
+        Node n3 = new Node(this.grid, goal.grid, level);
         if (x < 2)
         {
             n3.grid[x][y] = this.grid[x + 1][y];
@@ -61,7 +64,7 @@ public class Node {
         }
 
         //create fourth child node, swap the space with number to left
-        Node n4 = new Node(this.grid);
+        Node n4 = new Node(this.grid, goal.grid, level);
         if (x > 0)
         {
             n4.grid[x][y] = this.grid[x-1][y];
@@ -88,9 +91,16 @@ public class Node {
             }
         }
 
+        this.gValue(gValue);
+
         //return heuristic function value
         this.fValue = this.gValue + this.hValue;
         return this.fValue;
+    }
+
+    public void gValue(int gValue)
+    {
+        this.gValue = gValue;
     }
 
     public int hValue(int[][] goal)

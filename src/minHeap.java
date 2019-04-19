@@ -6,7 +6,6 @@ public class minHeap
 {
     private ArrayList<Node> ctree;
     int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
-    Node goal = new Node(goalState);
 
     public minHeap()
     {
@@ -33,7 +32,7 @@ public class minHeap
         System.out.print("Open list: ");
         for (Node val: ctree)
         {
-            System.out.print(val.hValue);
+            System.out.print(val.hValue+" ");
         }
         System.out.println();
     }

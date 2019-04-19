@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class minHeapBFS {
         private ArrayList<Node> ctree;
         int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
-        Node goal = new Node(goalState);
 
         public minHeapBFS()
         {

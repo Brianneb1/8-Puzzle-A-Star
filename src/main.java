@@ -18,17 +18,17 @@ public class main {
 
         //create goal matrix and corresponding node
         int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
-        Node goal = new Node(goalState);
+        Node goal = new Node(goalState, goalState, 0);
 
         int[][] empty = {{0,0,0},{0,0,0},{0,0,0}};
-        Node emptyNode = new Node(empty);
+        Node emptyNode = new Node(empty, goalState, 0);
 
         //call astar function on already complete puzzle, print completed path
-        tester.astarTest(goal,goal);
+       // tester.astarTest(goal,goal);
 
         //tester grid that's 2 numbers off
-        int[][] almostThere = {{2,1,3},{4,5,6},{7,8,0}};
-        Node almost = new Node(almostThere);
+        int[][] almostThere = {{1,2,3},{4,5,6},{7,0,8}};
+        Node almost = new Node(almostThere, goalState, 0);
 
         //call astar function on almost complete puzzle, store completed path
         tester.astarTest(almost,goal);

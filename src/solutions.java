@@ -33,7 +33,7 @@ public class solutions {
             }
 
             closed.add(n);
-            ArrayList<Node> children = n.createChildren();
+            ArrayList<Node> children = n.createChildren(goal, level);
 
             for (int i = 0; i < children.size(); i++) //for each child of n
             {
@@ -75,7 +75,7 @@ public class solutions {
             }
             else
             {
-                ArrayList<Node> children = n.createChildren();
+                ArrayList<Node> children = n.createChildren(goal,0);
                 for (Node child: children)
                 {
                     if (!visited.contains(child))
