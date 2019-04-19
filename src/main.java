@@ -24,9 +24,9 @@ public class main {
         Node emptyNode = new Node(empty, goalState, 0);
 
         //call astar function on already complete puzzle, print completed path
-       // tester.astarTest(goal,goal);
+        tester.astarTest(goal,goal);
 
-        //tester grid that's 2 numbers off
+        //tester grid that's 2 numbers off/switched
         int[][] almostThere = {{1,2,3},{4,5,6},{7,0,8}};
         Node almost = new Node(almostThere, goalState, 0);
 
@@ -35,29 +35,24 @@ public class main {
 
 
         //fill matrix randomly (for testing)
-//        for (int i = 0; i < 3; i++)
-//        {
-//            for (int j = 0; j < 3; j++)
-//            {
-//                int randIndex = rand.nextInt(values.size());
-//                int value = values.get(randIndex);
-//                puzzle[i][j] = value;
-//                values.remove(randIndex);
-//                System.out.print(value + " ");
-//            }
-//            System.out.println();
-//        }
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                int randIndex = rand.nextInt(values.size());
+                int value = values.get(randIndex);
+                puzzle[i][j] = value;
+                values.remove(randIndex);
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
 
-        //create node of current state, first level of children, and heap fvalues based on heuristic
-//        Node start = new Node(puzzle);
-//
-//        //call astar function on random puzzle, store completed path
-//        ArrayList<Node> complete = new solutions().astar(start, goal);
-//        for (int i = 0; i < complete.size(); i++)
-//        {
-//            System.out.println("Node "+i+":");
-//            complete.get(i).printGrid();
-//        }
+        //create node of current state (store fvalues based on heuristic)
+        Node start = new Node(puzzle, goalState, 0);
+
+        //call astar function on random puzzle
+        tester.astarTest(start,goal);
 
 
 
