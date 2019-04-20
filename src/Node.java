@@ -12,8 +12,9 @@ public class Node {
     {
         this.parent = null;
         this.grid = puzzle;
-        this.fValue = fValue(goal, level);
         this.hValue = hValue(goal);
+        gValue(level);
+        this.fValue = fValue(goal, level);
     }
 
 
@@ -118,19 +119,8 @@ public class Node {
     public int fValue(int[][] goal, int gValue)
     //gValue = level of child (how many moves made to get here)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                //count number of misplaced tiles (heuristic)
-                if (this.grid[i][j] != goal[i][j])
-                {
-                    this.hValue++;
-                }
-            }
-        }
-
         this.gValue(gValue);
+        this.hValue = hValue(goal);
 
         //return heuristic function value
         this.fValue = this.gValue + this.hValue;
@@ -144,6 +134,7 @@ public class Node {
 
     public int hValue(int[][] goal)
     {
+        this.hValue = 0;
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
