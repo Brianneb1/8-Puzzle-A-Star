@@ -51,12 +51,12 @@ public class main {
         //create node of current state (store fvalues based on heuristic)
         Node start = new Node(puzzle, goalState, 0);
 
-        //call astar function on random puzzle
-        tester.astarTest(start,goal);
+        boolean solvable = solutions.isSolvable(start); //check if solvable based on inversions
+        if(solvable) //call astar function on random puzzle
+         {tester.astarTest(start,goal);}
 
 
-
-
+        System.out.println("THE END");
 
     }
 }

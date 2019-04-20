@@ -3,6 +3,40 @@ import java.util.Arrays;
 
 public class solutions {
 
+    public static boolean isSolvable(Node start)
+    {
+        int inversionCount = 0;
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        for (int i = 0; i < 3; i++) //put numbers in order
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                numbers.add(start.grid[i][j]);
+            }
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = i+1; j < 9; j++)
+            {
+                if (numbers.get(j) > numbers.get(j))
+                {
+                    inversionCount++;
+                }
+            }
+        }
+
+        if (inversionCount%2==0)
+        {
+            return true;
+        }
+        else
+        {
+            System.out.println("Unsolvable");
+            return false;
+        }
+    }
+
     public static ArrayList<Node> astar(Node start, Node goal){
         //heap fvalues based on heuristic
         ArrayList<Node> closed = new ArrayList<Node>();//closed list
