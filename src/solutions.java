@@ -28,6 +28,7 @@ public class solutions {
 
         if (inversionCount%2==0)
         {
+            System.out.println("Solvable");
             return true;
         }
         else
