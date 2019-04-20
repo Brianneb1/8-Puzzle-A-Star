@@ -3,7 +3,7 @@ import java.util.*;
 public class Node {
 
     public int[][] grid;
-    private int fValue;
+    public int fValue;
     public int hValue;
     public int gValue;
     public Node parent;
