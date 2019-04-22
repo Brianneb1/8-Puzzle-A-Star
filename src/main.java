@@ -3,19 +3,6 @@ import java.util.*;
 public class main {
     public static void main(String[] args) {
 
-        //initialize variables
-        int[][] puzzle = new int[3][3];
-        ArrayList<Integer> values = new ArrayList();
-        Random rand = new Random();
-
-        //fill value arraylist (0 will represent empty)
-        for (int i = 0; i < 9; i++)
-        {
-            values.add(i);
-        }
-
-        System.out.println();
-
         //create goal matrix and corresponding node
         int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
         Node goal = new Node(goalState, goalState, 0);
@@ -41,18 +28,7 @@ public class main {
 
         System.out.println("Random puzzle:");
         //fill matrix randomly (for testing)
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                int randIndex = rand.nextInt(values.size());
-                int value = values.get(randIndex);
-                puzzle[i][j] = value;
-                values.remove(randIndex);
-                System.out.print(value + " ");
-            }
-            System.out.println();
-        }
+        int[][] puzzle = tester.generateRandom();
 
         //create node of current state (store fvalues based on heuristic)
         Node start = new Node(puzzle, goalState, 0);
@@ -60,12 +36,51 @@ public class main {
         boolean solvable = solutions.isSolvable(start); //check if solvable based on inversions
         System.out.println("\nA* test on random puzzle");
         if(solvable) //call astar function on random puzzle
-        {   tester.astarTest(start,goal);}
-        System.out.println("\nGreedy BFS test on random puzzle");
-        if(solvable) //call astar function on random puzzle
-        {   tester.greedyBFSTest(start,goal);}
+        {
+            tester.astarTest(start,goal);
+            System.out.println("\nGreedy BFS test on random puzzle");
+            tester.greedyBFSTest(start,goal);
+        }
 
         System.out.println("THE END");
 
+
+        //eventually.... i hope
+        double astarTime = 0;
+        double GBFSTime = 0;
+
+        //test both on 100 random puzzles
+        for (int i = 0; i < 100; i++)
+        {
+            int[][] puzzle1 = tester.generateRandom();
+            double startTime = 0;
+            double endTime = 0;
+            double totalTime = 0;
+
+            start = new Node(puzzle1, goalState, 0);
+            solvable = solutions.isSolvable(start); //check if solvable based on inversions
+            if(solvable) //call astar function on random puzzle
+            {
+                startTime = System.nanoTime();
+                tester.astarTest(start, goal);
+                endTime = System.nanoTime();
+                totalTime = endTime - startTime;
+                astarTime += totalTime;
+
+                //call GBFS function on random puzzle
+                startTime = System.nanoTime();
+                tester.greedyBFSTest(start, goal);
+                endTime = System.nanoTime();
+                totalTime = endTime - startTime;
+                GBFSTime += totalTime;
+            }
+            else{
+                if (i > 0)
+                    i -= 1;
+            }
+        }
+
+        System.out.println("The average time of A* algorithm to solve 8 Puzzle: " + astarTime/100);
+        System.out.println("The average time of Greedy Best First algorithm to solve 8 Puzzle: " + GBFSTime/100);
     }
 }
