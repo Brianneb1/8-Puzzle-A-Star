@@ -19,7 +19,7 @@ public class solutions {
         {
             for (int j = i+1; j < 9; j++)
             {
-                if (numbers.get(j) > numbers.get(j))
+                if (numbers.get(i) > numbers.get(j))
                 {
                     inversionCount++;
                 }
