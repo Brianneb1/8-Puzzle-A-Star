@@ -37,7 +37,7 @@ public class minHeapBFS {
         private void heapifyUp()
         {
             int curr = ctree.size()-1;
-            while (curr > 0 && ctree.get(curr).hValue(goalState) < ctree.get(parent_idx(curr)).hValue(goalState)) //elms left and curr fval < parent fvalue
+            while (curr > 0 && ctree.get(curr).hValue(goalState) < ctree.get(parent_idx(curr)).hValue(goalState)) //elms left and curr hval < parent hvalue
             {
                 Node temp;
                 temp = ctree.get(curr);

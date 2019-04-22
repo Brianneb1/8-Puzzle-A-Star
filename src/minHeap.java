@@ -67,7 +67,7 @@ public class minHeap
         {
             if (right_node(curr).fValue(goalState, level) < left_node(curr).fValue(goalState, level))
             {
-                if (ctree.get(curr).fValue(goalState, level) > right_node(curr).fValue(goalState, level))
+                if (ctree.get(curr).fValue(goalState, level) > right_node(curr).fValue(goalState, level)) // this is where one problem is
                 {
                     Node temp = ctree.get(curr); //temp = current index Node
                     ctree.set(curr, right_node(curr)); // set current index to right Node

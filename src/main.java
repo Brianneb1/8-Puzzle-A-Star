@@ -24,16 +24,22 @@ public class main {
         Node emptyNode = new Node(empty, goalState, 0);
 
         //call astar function on already complete puzzle, print completed path
+        System.out.println("A* test on solved puzzle");
         tester.astarTest(goal,goal);
+        System.out.println("Greedy BFS test on solved puzzle");
+        tester.greedyBFSTest(goal,goal);
 
         //tester grid that's 2 numbers off/switched
         int[][] almostThere = {{1,2,3},{4,5,6},{7,0,8}};
         Node almost = new Node(almostThere, goalState, 0);
 
         //call astar function on almost complete puzzle, store completed path
+        System.out.println("A* test on almost solved puzzle");
         tester.astarTest(almost,goal);
+        System.out.println("Greedy BFS test on almost solved puzzle");
+        tester.greedyBFSTest(almost,goal);
 
-
+        System.out.println("Random puzzle:");
         //fill matrix randomly (for testing)
         for (int i = 0; i < 3; i++)
         {
@@ -52,9 +58,12 @@ public class main {
         Node start = new Node(puzzle, goalState, 0);
 
         boolean solvable = solutions.isSolvable(start); //check if solvable based on inversions
+        System.out.println("\nA* test on random puzzle");
         if(solvable) //call astar function on random puzzle
-         {tester.astarTest(start,goal);}
-
+        {   tester.astarTest(start,goal);}
+        System.out.println("\nGreedy BFS test on random puzzle");
+        if(solvable) //call astar function on random puzzle
+        {   tester.greedyBFSTest(start,goal);}
 
         System.out.println("THE END");
 
