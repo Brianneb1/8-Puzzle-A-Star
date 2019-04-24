@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class solutions {
 
@@ -19,6 +18,10 @@ public class solutions {
         {
             for (int j = i+1; j < 9; j++)
             {
+                if (numbers.get(i) == 0 || numbers.get(j) == 0) //don't count zeros
+                {
+                    continue;
+                }
                 if (numbers.get(i) > numbers.get(j))
                 {
                     inversionCount++;
@@ -41,20 +44,24 @@ public class solutions {
     public static ArrayList<Node> astar(Node start, Node goal){
         //heap fvalues based on heuristic
         ArrayList<Node> closed = new ArrayList<Node>();//closed list
-        minHeap open = new minHeap(); //heap based on fvalues (open list)
+        //minHeap open = new minHeap(); //heap based on fvalues (open list)
+        PriorityQueue<Node> open = new PriorityQueue(new AStarComparator());
+
         ArrayList<Node> path = new ArrayList<Node>();
         int level = 0;
 
         //add starting node to open list
-        open.add(start, level);
+        //open.add(start, level);
+        open.add(start);
 
         while (open.size() != 0) //while elms left in open list
         {
-            level++;
-            Node n = open.remove(level); //get current node
+            //level++;
+            //Node n = open.remove(level); //get current node
+            Node n = open.poll(); //get current node instead of open.remove()
 
             //for debugging purposes, print list of nodes in open list (heap)
-            open.printList();
+            //open.printList();
 
             //if (n.grid.equals(goal.grid)) //if found goal state, recreate path
             if(Arrays.deepEquals(n.grid, goal.grid)) //gets to a certain point that n never changes
@@ -75,12 +82,12 @@ public class solutions {
                 Node child = children.get(i); //get child
                 if (closed.contains(child)) //if child in closed, skip
                     continue;
-                if(open.contains(child)) //if child in open
-                {
-                    if (child.gValue <= n.gValue) //if child gVal < parent, skip
-                        continue;
-                }
-                open.add(child, level); //add child to open list
+//                if(open.contains(child)) //if child in open
+//                {
+//                    if (child.gValue <= n.gValue) //if child gVal < parent, skip
+//                        continue;
+//                }
+                open.add(child); //add child to open list
                 child.setParent(n);
             }
         }
