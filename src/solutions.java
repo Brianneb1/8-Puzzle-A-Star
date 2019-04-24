@@ -48,7 +48,7 @@ public class solutions {
         PriorityQueue<Node> open = new PriorityQueue(new AStarComparator());
 
         ArrayList<Node> path = new ArrayList<Node>();
-        int level = 0;
+        //int level = 0;
 
         //add starting node to open list
         //open.add(start, level);
@@ -75,13 +75,13 @@ public class solutions {
             }
 
             closed.add(n);
-            ArrayList<Node> children = n.createChildren(goal, level);
+            ArrayList<Node> children = n.createChildren(goal);
 
             for (int i = 0; i < children.size(); i++) //for each child of n (gets same child every time?)
             {
                 Node child = children.get(i); //get child
                 if (closed.contains(child)) //if child in closed, skip
-                { continue;}
+                    { continue;}
 //                if(open.contains(child)) //if child in open
 //                {
 //                    if (child.gValue <= n.gValue) //if child gVal < parent, skip
@@ -121,7 +121,7 @@ public class solutions {
             }
             else
             {
-                ArrayList<Node> children = n.createChildren(goal,0);
+                ArrayList<Node> children = n.createChildren(goal);
                 for (Node child: children)
                 {
                     if (!visited.contains(child))

@@ -36,7 +36,7 @@ public class Node {
     }
 
     //create child nodes, return as an arraylist used for astar
-    public ArrayList<Node> createChildren(Node goal, int level)
+    public ArrayList<Node> createChildren(Node goal)
     {
         //arraylist to add child nodes to
         ArrayList<Node> children = new ArrayList<Node>();
