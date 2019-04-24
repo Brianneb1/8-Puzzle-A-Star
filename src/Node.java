@@ -17,6 +17,11 @@ public class Node {
         this.fValue = fValue(goal, level);
     }
 
+    public boolean equals(Node n1, Node n2)
+    {
+        boolean equal = Arrays.deepEquals(n1.grid, n2.grid);
+        return equal;
+    }
 
     //create child nodes, return as an arraylist used for astar
     public ArrayList<Node> createChildren(Node goal, int level)
@@ -74,7 +79,7 @@ public class Node {
             }
         }
         //create first child node, swap the space with number below
-        Node n1 = new Node(grid1, goal.grid, level);
+        Node n1 = new Node(grid1, goal.grid, this.gValue++);
         if (y > 0) //make sure it doesn't go out of bounds
         {
             int temp = n1.grid[x][y - 1];
@@ -84,7 +89,7 @@ public class Node {
         }
 
         //create second child node, swap the space with number above
-        Node n2 = new Node(grid2, goal.grid, level);
+        Node n2 = new Node(grid2, goal.grid, this.gValue++);
         if (y < 2)
         {
             n2.grid[x][y] = grid2[x][y + 1];
@@ -94,7 +99,7 @@ public class Node {
         }
 
         //create third child node, swap the space with number to right
-        Node n3 = new Node(grid3, goal.grid, level);
+        Node n3 = new Node(grid3, goal.grid, this.gValue++);
         if (x < 2)
         {
             n3.grid[x][y] = grid3[x + 1][y];
@@ -104,7 +109,7 @@ public class Node {
 
 
         //create fourth child node, swap the space with number to left
-        Node n4 = new Node(grid4, goal.grid, level);
+        Node n4 = new Node(grid4, goal.grid, this.gValue++);
         if (x > 0)
         {
             n4.grid[x][y] = grid4[x-1][y];
