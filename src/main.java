@@ -7,9 +7,6 @@ public class main {
         int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
         Node goal = new Node(goalState, goalState, 0);
 
-        int[][] empty = {{0,0,0},{0,0,0},{0,0,0}};
-        Node emptyNode = new Node(empty, goalState, 0);
-
         //call astar function on already complete puzzle, print completed path
         System.out.println("A* test on solved puzzle");
         tester.astarTest(goal,goal);
