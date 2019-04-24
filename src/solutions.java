@@ -10,7 +10,7 @@ public class solutions {
         {
             for (int j = 0; j < 3; j++)
             {
-                numbers.add(start.grid[i][j]);
+                numbers.add(start.getGrid()[i][j]);
             }
         }
 
@@ -64,7 +64,7 @@ public class solutions {
             //open.printList();
 
             //if (n.grid.equals(goal.grid)) //if found goal state, recreate path
-            if(Arrays.deepEquals(n.grid, goal.grid)) //gets to a certain point that n never changes
+            if(Arrays.deepEquals(n.getGrid(), goal.getGrid())) //gets to a certain point that n never changes
             {
                 while (n != null) //until reach end of chain
                 {
@@ -99,7 +99,7 @@ public class solutions {
         //minHeapBFS heap = new minHeapBFS();
         //heap.add(start);
 
-        PriorityQueue<Node> open = new PriorityQueue(new AStarComparator());
+        PriorityQueue<Node> open = new PriorityQueue(new BFSComparator());
         open.add(start);
 
         ArrayList<Node> visited = new ArrayList<Node>();
@@ -110,7 +110,7 @@ public class solutions {
         {
             Node n = open.poll();
             //if (n.grid.equals(goal.grid))
-            if(Arrays.deepEquals(n.grid, goal.grid))
+            if(Arrays.deepEquals(n.getGrid(), goal.getGrid()))
             {
                 while (n != null) //until reach end of chain
                 {
@@ -135,7 +135,7 @@ public class solutions {
             }
         }
 
-        return null;
+        return path;
 
     }
 
