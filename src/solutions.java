@@ -81,7 +81,7 @@ public class solutions {
             {
                 Node child = children.get(i); //get child
                 if (closed.contains(child)) //if child in closed, skip
-                    continue;
+                { continue;}
 //                if(open.contains(child)) //if child in open
 //                {
 //                    if (child.gValue <= n.gValue) //if child gVal < parent, skip
@@ -96,15 +96,19 @@ public class solutions {
 
 
     public static ArrayList<Node> greedyBestFirst(Node start, Node goal){
-        minHeapBFS heap = new minHeapBFS();
-        heap.add(start);
+        //minHeapBFS heap = new minHeapBFS();
+        //heap.add(start);
+
+        PriorityQueue<Node> open = new PriorityQueue(new AStarComparator());
+        open.add(start);
+
         ArrayList<Node> visited = new ArrayList<Node>();
         ArrayList<Node> path = new ArrayList<Node>();
 
 
-        while (heap.size() != 0)
+        while (open.size() != 0)
         {
-            Node n = heap.remove();
+            Node n = open.poll();
             //if (n.grid.equals(goal.grid))
             if(Arrays.deepEquals(n.grid, goal.grid))
             {
@@ -123,7 +127,7 @@ public class solutions {
                     if (!visited.contains(child))
                     {
                         visited.add(child);
-                        heap.add(child);
+                        open.add(child);
                         child.setParent(n);
                     }
                 }
