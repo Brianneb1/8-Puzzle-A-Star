@@ -31,12 +31,10 @@ public class solutions {
 
         if (inversionCount%2==0)
         {
-           // System.out.println("Solvable");
             return true;
         }
         else
         {
-          //  System.out.println("Unsolvable");
             return false;
         }
     }
@@ -46,24 +44,17 @@ public class solutions {
         ArrayList<Node> closed = new ArrayList<Node>();//closed list
         //minHeap open = new minHeap(); //heap based on fvalues (open list)
         PriorityQueue<Node> open = new PriorityQueue(new AStarComparator());
-
         ArrayList<Node> path = new ArrayList<Node>();
         int level = 0;
 
         //add starting node to open list
         open.add(start);
        // open.add(start);
-
         while (open.size() != 0) //while elms left in open list
         {
-            //level++;
             //Node n = open.remove(level); //get current node
             Node n = open.poll(); //get current node instead of open.remove()
 
-            //for debugging purposes, print list of nodes in open list (heap)
-            //open.printList();
-
-            //if (n.grid.equals(goal.grid)) //if found goal state, recreate path
             if(Arrays.deepEquals(n.getGrid(), goal.getGrid())) //gets to a certain point that n never changes
             {
                 while (n != null) //until reach end of chain
@@ -82,11 +73,6 @@ public class solutions {
                 Node child = children.get(i); //get child
                 if (closed.contains(child)) //if child in closed, skip
                     { continue;}
-//                if(open.contains(child)) //if child in open
-//                {
-//                    if (child.gValue <= n.gValue) //if child gVal < parent, skip
-//                        continue;
-//                }
                 open.add(child); //add child to open list
                 child.setParent(n);
             }
@@ -105,11 +91,9 @@ public class solutions {
         ArrayList<Node> visited = new ArrayList<Node>();
         ArrayList<Node> path = new ArrayList<Node>();
 
-
         while (open.size() != 0)
         {
             Node n = open.poll();
-            //if (n.grid.equals(goal.grid))
             if(Arrays.deepEquals(n.getGrid(), goal.getGrid()))
             {
                 while (n != null) //until reach end of chain
@@ -131,12 +115,8 @@ public class solutions {
                         child.setParent(n);
                     }
                 }
-
             }
         }
-
         return path;
-
     }
-
 }

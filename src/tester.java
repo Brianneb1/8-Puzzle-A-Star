@@ -3,7 +3,6 @@ import java.util.*;
 public class tester {
 
     public static void astarTest(Node start, Node goal, boolean print){
-
         //call astar function on already complete puzzle, store completed path
         ArrayList<Node> tester = new solutions().astar(start, goal);
         if(print)
@@ -48,7 +47,6 @@ public class tester {
                 values.remove(randIndex);
             }
         }
-
         return puzzle;
     }
 }

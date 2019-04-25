@@ -8,5 +8,4 @@ public class BFSComparator implements Comparator<Node> {
     {
         return o1.hValue(goalState) - o2.hValue(goalState);
     }
-
 }

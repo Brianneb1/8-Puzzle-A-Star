@@ -2,7 +2,6 @@ import java.util.*;
 
 public class main {
     public static void main(String[] args) {
-
         //create goal matrix and corresponding node
         int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
         Node goal = new Node(goalState, goalState, 0);
@@ -48,10 +47,8 @@ public class main {
             {
                 //fill matrix randomly (for testing)
                 puzzle = tester.generateRandom();
-
                 //create node of current state (store fvalues based on heuristic)
                 start = new Node(puzzle, goalState, 0);
-
                 solvable = solutions.isSolvable(start); //check if solvable based on inversions
             }
         }
@@ -60,8 +57,6 @@ public class main {
         System.out.println("**Please wait at least 30 seconds for this to complete**");
         System.out.println("Scroll up to view solution nodes for A* and GreedyBFS on a solved, almost solved, and random puzzle.");
 
-
-        //eventually.... i hope
         double astarTime = 0;
         double GBFSTime = 0;
 
