@@ -7,6 +7,7 @@ public class main {
         int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}};
         Node goal = new Node(goalState, goalState, 0);
 
+        System.out.println("SOLVED PUZZLE. . .");
         //call astar function on already complete puzzle, print completed path
         System.out.println("A* test on solved puzzle");
         tester.astarTest(goal,goal, true);
@@ -17,29 +18,47 @@ public class main {
         int[][] almostThere = {{1,2,3},{4,5,6},{7,0,8}};
         Node almost = new Node(almostThere, goalState, 0);
 
+        System.out.println("ALMOST SOLVED PUZZLE. . .");
         //call astar function on almost complete puzzle, store completed path
         System.out.println("A* test on almost solved puzzle");
         tester.astarTest(almost,goal, true);
         System.out.println("Greedy BFS test on almost solved puzzle");
         tester.greedyBFSTest(almost,goal, true);
 
-        System.out.println("Random puzzle:");
+        System.out.println("RANDOM PUZZLE. . .");
+        boolean run = true;
         //fill matrix randomly (for testing)
         int[][] puzzle = tester.generateRandom();
-
         //create node of current state (store fvalues based on heuristic)
         Node start = new Node(puzzle, goalState, 0);
-
         boolean solvable = solutions.isSolvable(start); //check if solvable based on inversions
-        if(solvable) //call astar function on random puzzle
+
+        //loop til you find solvable random puzzle and print those results before moving on to timing
+        while(run)
         {
-            System.out.println("\nA* test on random puzzle");
-            tester.astarTest(start,goal, false);
-            System.out.println("\nGreedy BFS test on random puzzle");
-            tester.greedyBFSTest(start,goal, false);
+            if (solvable) //call astar function on random puzzle
+            {
+                System.out.println("A* test on random puzzle");
+                tester.astarTest(start, goal, true);
+                System.out.println("\nGreedy BFS test on random puzzle");
+                tester.greedyBFSTest(start, goal, true);
+                run = false;
+            }
+            else
+            {
+                //fill matrix randomly (for testing)
+                puzzle = tester.generateRandom();
+
+                //create node of current state (store fvalues based on heuristic)
+                start = new Node(puzzle, goalState, 0);
+
+                solvable = solutions.isSolvable(start); //check if solvable based on inversions
+            }
         }
 
-        System.out.println("THE END");
+        System.out.println("CALCULATING TIMING. . .");
+        System.out.println("**Please wait at least 30 seconds for this to complete**");
+        System.out.println("Scroll up to view solution nodes for A* and GreedyBFS on a solved, almost solved, and random puzzle.");
 
 
         //eventually.... i hope
@@ -77,7 +96,7 @@ public class main {
             }
         }
 
-        System.out.println("The average time of A* algorithm to solve 8 Puzzle: " + astarTime/100);
-        System.out.println("The average time of Greedy Best First algorithm to solve 8 Puzzle: " + GBFSTime/100);
+        System.out.println("\nThe average time of A* algorithm to solve 8 Puzzle (100 iterations): " + astarTime/100);
+        System.out.println("The average time of Greedy Best First algorithm to solve 8 Puzzle (100 iterations): " + GBFSTime/100);
     }
 }

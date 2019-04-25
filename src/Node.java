@@ -233,7 +233,6 @@ public class Node {
             System.out.println();
         }
         System.out.println();
-        System.out.println();
     }
 
     public int[][] getGrid()

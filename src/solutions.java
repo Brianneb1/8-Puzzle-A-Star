@@ -31,12 +31,12 @@ public class solutions {
 
         if (inversionCount%2==0)
         {
-            System.out.println("Solvable");
+           // System.out.println("Solvable");
             return true;
         }
         else
         {
-            System.out.println("Unsolvable");
+          //  System.out.println("Unsolvable");
             return false;
         }
     }
