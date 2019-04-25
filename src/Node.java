@@ -29,11 +29,30 @@ public class Node {
 //        this.fValue = n.fValue(goal, gValue);
 //    }
 
-    public boolean equals(Node n1, Node n2)
+//    public boolean equals(Node n1, Node n2)
+//    {
+//        boolean equal = Arrays.deepEquals(n1.grid, n2.grid);
+//        return equal;
+//    }
+
+    @Override
+    public String toString()
     {
-        boolean equal = Arrays.deepEquals(n1.grid, n2.grid);
-        return equal;
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<3; i++)
+            for (int j=0; j<3; j++)
+                sb.append(grid[i][j]);
+        return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object n2)
+    {
+        //boolean equal = Arrays.deepEquals(grid, n2.grid);
+        //return equal;
+        return toString().equals(n2.toString());
+    }
+
 
     //create child nodes, return as an arraylist used for astar
     public ArrayList<Node> createChildren(Node goal)
