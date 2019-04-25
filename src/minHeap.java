@@ -15,7 +15,9 @@ public class minHeap
     public void add(Node n, int level)
     {
         ctree.add(n); //add node after finding fvalue
-        heapifyUp(level);;
+//        int index = ctree.size() - 1;
+//        heapifyUp(index);
+        heapifyUp(level);
     }
 
     public Node remove(int level)
@@ -23,8 +25,22 @@ public class minHeap
         Node val = ctree.get(0);
         ctree.set(0, ctree.get(ctree.size()-1));
         ctree.remove(ctree.size() - 1);
+        //heapifyDown(0);
         heapifyDown(level);
         return val;
+    }
+
+    public int getIdx(Node n1)
+    {
+        int idx = 0;
+        for (Node n: ctree)
+        {
+            if (n.equals(n1))
+                return idx;
+            idx++;
+        }
+        System.out.println("Not in this heap");
+        return ctree.size();
     }
 
     public void printList()
@@ -49,6 +65,12 @@ public class minHeap
 
     private void heapifyUp(int level)
     {
+//        if (curr > 0 && parent_node(curr).getfValue() < ctree.get(curr).getfValue())
+//        {
+//            swap(curr, parent_idx(curr));
+//            heapifyUp(parent_idx(curr));
+//        }
+
         int curr = ctree.size()-1;
         while (curr > 0 && ctree.get(curr).fValue(goalState, level) < ctree.get(parent_idx(curr)).fValue(goalState, level)) //elms left and curr fval < parent fvalue
         {
@@ -62,6 +84,21 @@ public class minHeap
 
     private void heapifyDown(int level)
     {
+//        Node left = left_node(curr);
+////        Node right = right_node(curr);
+////
+////        int smallest = curr;
+////
+////        if (getIdx(left) < ctree.size() && left.getfValue() < ctree.get(curr).getfValue())
+////            smallest = getIdx(left);
+////        if (getIdx(right) < ctree.size() && right.getfValue() < ctree.get(smallest).getfValue())
+////            smallest = getIdx(right);
+////
+////        if (smallest != curr)
+////        {
+////            swap(curr, smallest);
+////            heapifyDown(smallest);
+////        }
         int curr = 0;
         while (right_node(curr) != null)
         {
