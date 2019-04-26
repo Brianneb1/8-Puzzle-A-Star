@@ -26,20 +26,20 @@ public class tester {
         }
     }
 
-    public static int[][] generateRandom(){
-        int[][] puzzle = new int[3][3];
+    public static int[][] generateRandom(int size){
+        int[][] puzzle = new int[size][size];
         ArrayList<Integer> values = new ArrayList();
         Random rand = new Random();
 
         //fill value arraylist (0 will represent empty)
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < size*size; i++)
         {
             values.add(i);
         }
 
-        for (int h = 0; h < 3; h++)
+        for (int h = 0; h < size; h++)
         {
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < size; j++)
             {
                 int randIndex = rand.nextInt(values.size());
                 int value = values.get(randIndex);

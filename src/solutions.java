@@ -45,7 +45,7 @@ public class solutions {
         //minHeap open = new minHeap(); //heap based on fvalues (open list)
         PriorityQueue<Node> open = new PriorityQueue(new AStarComparator());
         ArrayList<Node> path = new ArrayList<Node>();
-        int level = 0;
+        //int level = 0;
 
         //add starting node to open list
         open.add(start);

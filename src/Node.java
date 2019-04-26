@@ -7,12 +7,12 @@ public class Node {
     public int gValue;
     public Node parent;
 
-    public Node(int[][] puzzle, int[][] goal, int level)
+    public Node(int[][] puzzle, int[][] goal, int level, int size)
     {
         this.parent = null;
-        this.grid = new int[3][3];
-        for (int i=0; i<3; i++)
-            for (int j=0; j<3; j++)
+        this.grid = new int[size][size];
+        for (int i=0; i<size; i++)
+            for (int j=0; j<size; j++)
                 grid[i][j] = puzzle[i][j];
         this.hValue = hValue(goal);
         setgValue(level);
@@ -23,8 +23,8 @@ public class Node {
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        for (int i=0; i<3; i++)
-            for (int j=0; j<3; j++)
+        for (int i=0; i<this.getGrid().length; i++)
+            for (int j=0; j<this.getGrid().length; j++)
                 sb.append(grid[i][j]);
         return sb.toString();
     }
@@ -48,9 +48,9 @@ public class Node {
         y = 0;
 
         //find the space
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < this.getGrid().length ; i++)
         {
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < this.getGrid().length; j++)
             {
                 if (this.getGrid()[i][j] == 0)
                 {
@@ -61,7 +61,7 @@ public class Node {
         }
 
         //create first child node, swap the space with number below
-        Node n1 = new Node(this.getGrid(), goal.getGrid(), this.getgValue());
+        Node n1 = new Node(this.getGrid(), goal.getGrid(), this.getgValue(), this.getGrid().length);
         n1.setgValue(this.getgValue()+1);
         if (y > 0) //make sure it doesn't go out of bounds
         {
@@ -72,9 +72,9 @@ public class Node {
         }
 
         //create second child node, swap the space with number above
-        Node n2 = new Node(this.getGrid(), goal.getGrid(), this.getgValue());
+        Node n2 = new Node(this.getGrid(), goal.getGrid(), this.getgValue(), this.getGrid().length);
         n2.setgValue(this.getgValue()+1);
-        if (y < 2)
+        if (y < this.getGrid().length-1)
         {
             int temp = n2.grid[x][y + 1];
             n2.grid[x][y + 1] = 0;
@@ -83,9 +83,9 @@ public class Node {
         }
 
         //create third child node, swap the space with number to right
-        Node n3 = new Node(this.getGrid(), goal.getGrid(), this.getgValue());
+        Node n3 = new Node(this.getGrid(), goal.getGrid(), this.getgValue(), this.getGrid().length);
         n3.setgValue(this.getgValue()+1);
-        if (x < 2)
+        if (x < this.getGrid().length-1)
         {
             int temp = n3.grid[x + 1][y];
             n3.grid[x + 1][y] = 0;
@@ -94,7 +94,7 @@ public class Node {
         }
 
         //create fourth child node, swap the space with number to left
-        Node n4 = new Node(this.getGrid(), goal.getGrid(), this.getgValue());
+        Node n4 = new Node(this.getGrid(), goal.getGrid(), this.getgValue(), this.getGrid().length);
         n4.setgValue(this.getgValue()+1);
         if (x > 0)
         {
@@ -135,9 +135,9 @@ public class Node {
     public int hValue(int[][] goal)
     {
         this.hValue = 0;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < this.getGrid().length; i++)
         {
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < this.getGrid().length; j++)
             {
                 //count number of misplaced tiles (heuristic)
                 if (this.grid[i][j] != goal[i][j])
@@ -157,12 +157,15 @@ public class Node {
 
     public void printGrid()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < this.getGrid().length; i++)
         {
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < this.getGrid().length; j++)
             {
                 int value = this.grid[i][j];
-                System.out.print(value + " ");
+                if (value < 9)
+                    System.out.print(value + "  ");
+                else
+                    System.out.print(value + " ");
             }
             System.out.println();
         }
