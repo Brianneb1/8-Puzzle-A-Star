@@ -1,5 +1,6 @@
 import java.util.Comparator;
 
+//courtesy of Professor Eloe
 public class AStarComparator implements Comparator<Node> {
     int[][] goalState = {{1,2,3},{4,5,6},{7,8,0}}; //8 puzzle
     int[][] goalState2 = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}}; //16 puzzle
