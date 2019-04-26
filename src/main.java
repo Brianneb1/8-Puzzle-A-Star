@@ -8,6 +8,7 @@ public class main {
         Node goal = new Node(goalState, goalState, 0, 3);
         Node goal2 = new Node(goalState2, goalState2, 0, 4);
 
+        System.out.println("ALGORITHM VERIFICATION");
         System.out.println("SOLVED 8 PUZZLE. . .");
         //call astar function on already complete puzzle, print completed path
         System.out.println("A* test on solved puzzle");
@@ -71,6 +72,7 @@ public class main {
             }
         }
 
+        //Takes too long!
 //        System.out.println("RANDOM 15 PUZZLE. . .");
 //        System.out.println("**This may take about 30 seconds each**");
 //        boolean run2 = true;
@@ -107,7 +109,7 @@ public class main {
         double endTime;
         double totalTime;
 
-        //test both on 100 solved puzzles
+        //test both on 100 solved 8 puzzles
         for (int i = 0; i < 100; i++)
         {
             startTime = System.nanoTime();
@@ -128,7 +130,28 @@ public class main {
         astarTime = 0;
         GBFSTime = 0;
 
-        //test both on 100 almost solved puzzles
+        //test both on 100 solved 15 puzzles
+        for (int i = 0; i < 100; i++)
+        {
+            startTime = System.nanoTime();
+            tester.astarTest(goal2, goal2, false);
+            endTime = System.nanoTime();
+            totalTime = endTime - startTime;
+            astarTime += totalTime;
+
+            startTime = System.nanoTime();
+            tester.greedyBFSTest(goal2, goal2, false);
+            endTime = System.nanoTime();
+            totalTime = endTime - startTime;
+            GBFSTime += totalTime;
+        }
+        System.out.println("\nThe average time of A* algorithm to solve almost solved 15 Puzzle (100 iterations): " + astarTime/100);
+        System.out.println("The average time of Greedy BFS algorithm to solve almost solved 15 Puzzle (100 iterations): " + GBFSTime/100);
+
+        astarTime = 0;
+        GBFSTime = 0;
+
+        //test both on 100 almost solved 8 puzzles
         for (int i = 0; i < 100; i++)
         {
             startTime = System.nanoTime();
@@ -145,6 +168,27 @@ public class main {
         }
         System.out.println("\nThe average time of A* algorithm to solve almost solved 8 Puzzle (100 iterations): " + astarTime/100);
         System.out.println("The average time of Greedy BFS algorithm to solve almost solved 8 Puzzle (100 iterations): " + GBFSTime/100);
+
+        astarTime = 0;
+        GBFSTime = 0;
+
+        //test both on 100 almost solved 15 puzzles
+        for (int i = 0; i < 100; i++)
+        {
+            startTime = System.nanoTime();
+            tester.astarTest(almost2, goal2, false);
+            endTime = System.nanoTime();
+            totalTime = endTime - startTime;
+            astarTime += totalTime;
+
+            startTime = System.nanoTime();
+            tester.greedyBFSTest(almost2, goal2, false);
+            endTime = System.nanoTime();
+            totalTime = endTime - startTime;
+            GBFSTime += totalTime;
+        }
+        System.out.println("\nThe average time of A* algorithm to solve almost solved 15 Puzzle (100 iterations): " + astarTime/100);
+        System.out.println("The average time of Greedy BFS algorithm to solve almost solved 15 Puzzle (100 iterations): " + GBFSTime/100);
 
         System.out.println("\n\nCALCULATING TIMING. . .");
         System.out.println("**IMPORTANT - Please wait at least 1 minute for this section to complete**");
@@ -182,7 +226,7 @@ public class main {
             }
         }
 
-        System.out.println("\nThe average time of A* algorithm to solve 8 Puzzle (100 iterations): " + astarTime/100);
-        System.out.println("The average time of Greedy Best First algorithm to solve 8 Puzzle (100 iterations): " + GBFSTime/100);
+        System.out.println("\nThe average time of A* algorithm to solve random 8 Puzzle (100 iterations): " + astarTime/100);
+        System.out.println("The average time of Greedy Best First algorithm to solve random 8 Puzzle (100 iterations): " + GBFSTime/100);
     }
 }
